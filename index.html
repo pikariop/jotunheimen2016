@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Jotunheimen 2016</title>
+    </head>
+
+    <link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.css" />
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        .map_fullscreen {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <body>
+        <div id="map" class="map_fullscreen"></div>
+
+        <script src="route.js"></script>
+        <script src="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.js"></script>
+        <script type="text/javascript">
+            (function () {
+
+                // Todo Remove magic numbers. Get route bounds and pass them to map.fitBounds()
+                var map = L.map('map').setView([61.5, 8.2], 10);
+
+                L.tileLayer(
+                    'http://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo2&zoom={z}&x={x}&y={y}', {
+                    attribution: "&copy; <a href='http://statkart.no'>Kartverket</a>"
+                }).addTo(map);
+
+                var hikingRoute = L.geoJson(route);
+
+                hikingRoute.addTo(map);
+
+            }());
+        </script>
+    </body>
+</html>
